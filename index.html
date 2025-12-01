@@ -932,28 +932,22 @@ h1, h2, h3 {
             transform: translate(-50%, -50%);
         }
         .droid.d1 { animation: path1 5s linear infinite; background: #fff; color: #000; }
-        .droid.d2 { animation: path2 4s ease-in-out infinite alternate; background: #a3e635; color: #000; }
+        .droid.d2 { top: 25%; left: 75%; background: #a3e635; color: #000; } /* Static Robot */
         .droid.d3 { animation: path3 6s linear infinite; background: #38bdf8; color: #000; }
-        .droid.d4 { animation: path4 5s ease-in-out infinite alternate; background: #a3e635; color: #000; }
+        .droid.d4 { top: 75%; left: 25%; background: #a3e635; color: #000; } /* Static Robot */
 
         @keyframes path1 {
             0% { top: 25%; left: 25%; }
             50% { top: 25%; left: 75%; }
             100% { top: 25%; left: 25%; }
         }
-        @keyframes path2 {
-            0% { top: 25%; left: 75%; }
-            100% { top: 75%; left: 75%; }
-        }
+        /* Path 2 Removed */
         @keyframes path3 {
             0% { top: 25%; left: 25%; }
             50% { top: 75%; left: 75%; }
             100% { top: 25%; left: 25%; }
         }
-        @keyframes path4 {
-            0% { top: 75%; left: 25%; }
-            100% { top: 25%; left: 75%; }
-        }
+        /* Path 4 Removed */
     </style>
 
     <!-- Slide 9: Recommendations -->
