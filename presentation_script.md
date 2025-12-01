@@ -46,17 +46,17 @@ Cities like London have introduced 'Green Zones' (ULEZ). They charge us £12.50 
 Second, **Economic (The Money icon)**:
 Interest rates are high (5%). Building a £250m warehouse is now too expensive. We cannot afford to borrow that much money anymore.
 
-Third, **Social (The People icon)**:
-Customers have changed. They want delivery in **one hour**, not next-day. A warehouse on the highway cannot reach a customer in Chelsea in 60 minutes.
+Third, **Technological (The Chip icon)**:
+**AI Vision is the game changer.** New AI can now let robots 'see' the difference between a hard apple and a soft strawberry. This means robots can finally handle messy food without crushing it.
 
-Conclusion: The 'Giant Warehouse' is too expensive and too slow."
+Conclusion: The 'Giant Warehouse' is too expensive, but AI gives us a new way out."
 
 **[CLICK TO NEXT SLIDE]**
 
 ---
 
 ### **Slide 4: Architecture**
-"To solve this, look at our Architecture on **Slide 4**.
+"To understand the problem, look at our Architecture on **Slide 4**.
 
 Currently, our system is a straight line: Order → Brain → Hive → Van.
 The 'Hive' is a **Giant Block**.
@@ -92,8 +92,9 @@ We used 'Scenario Planning' to see two different futures.
 1.  **Path 1 (Top):** We keep building Giant Warehouses.
 2.  **Path 2 (Bottom):** We use AI to go Local.
 
-If we stay on Path 1, we fall into a Trap.
-If we choose Path 2, we build a 'Local Mesh'."
+**How does AI help?**
+AI allows robots to work in messy environments. They don't need a perfect grid anymore. They can see and adapt.
+This unlocks **Path 2: The Local Mesh**."
 
 **[CLICK TO NEXT SLIDE]**
 
@@ -102,7 +103,7 @@ If we choose Path 2, we build a 'Local Mesh'."
 ### **Slide 7: Scenario 1 - The Trap**
 "Let's look at **Slide 7: The 'Giant Warehouse' Trap**.
 
-This is what happens if we don't change.
+This is what happens if we don't use AI to change.
 We build a massive building that lasts 50 years.
 But shopping habits change every 5 years.
 If everyone switches to 'Instant Delivery', our giant warehouse becomes a **'Useless Building'**. It is in the wrong place, and we can't move it.
@@ -118,7 +119,7 @@ Also, look at the **'Risk of Failure'**. If one giant warehouse has a fire, we l
 
 Instead of one giant hub, we look at **'High Street Voids'** (Empty Shops).
 **14% of shops are empty.**
-We can put small, smart robots inside these empty shops.
+Because our new AI robots are smart and gentle, we can put them inside these small, messy shops.
 
 This allows **Green Delivery**.
 Because we are close to the customer, we can deliver by bike or on foot.
@@ -135,11 +136,11 @@ No more vans. No more traffic taxes."
 **Stop Building Giant Hubs.** We must stop spending money on new giant warehouses today.
 
 **2. New Research Goal (The Green Layer):**
-Focus on **'Soft Robotics'**. We need to invent robots that are gentle with fruit and can work in old, messy buildings.
+Focus on **'AI Vision & Soft Hands'**. We need to teach our robots to see and hold delicate food so they can work in old shops.
 
 **3. New Business Plan (The Orange Layer):**
 We stop being a construction company.
-Instead, we sell **'The Brain'** (our Software). We license our technology to supermarkets so they can upgrade *their* stores, rather than building our own."
+Instead, we sell **'The Brain'** (our AI Software). We license our AI to supermarkets so they can run their own local robot networks."
 
 **[CLICK TO NEXT SLIDE]**
 
@@ -149,8 +150,8 @@ Instead, we sell **'The Brain'** (our Software). We license our technology to su
 "To summarize on **Slide 10**:
 
 1.  **Market:** Taxes and Costs are killing the Big Warehouse model.
-2.  **Tech:** We need flexible robots that fit in cities.
-3.  **Vision:** We must become a 'Smart Logistics' company, not a 'Warehouse Builder'.
+2.  **Tech:** AI allows us to move from rigid grids to flexible, local robots.
+3.  **Vision:** We must become a 'Smart Logistics' company, selling the AI Brain, not the steel Warehouse.
 
 Thank you. I am happy to take questions."
 
