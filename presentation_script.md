@@ -43,22 +43,22 @@ Today I will cover:
 ### **Slide 3: Market Forces**
 "On **Slide 3**, we see the five forces squeezing our business (PESTEL Analysis).
 
-First, **Political (The Gavel icon)**:
-Cities like London have introduced 'Green Zones' (ULEZ). They charge us £12.50 every day for every diesel van.
+First, **Political**:
+Cities like London have introduced **'Green Zones' (ULEZ)**. They charge us £12.50 every day for every diesel van. For a fleet of 2,000 vans, this costs us **£9 million a year** in taxes.
 
-Second, **Economic (The Money icon)**:
-Interest rates are high (5%). Building a £250m warehouse is now too expensive.
+Second, **Economic**:
+Interest rates are high (5%). Building a £250m warehouse is now too expensive. We cannot afford to borrow money when debt is this expensive.
 
-Third, **Social (The People icon)**:
-Customers want delivery in **one hour**, not next-day. A distant warehouse cannot reach them fast enough.
+Third, **Social**:
+Customers have changed. They want delivery in **one hour**, not next-day. A warehouse on the M25 highway simply cannot physically reach a customer in Chelsea in 60 minutes. We are too far away.
 
-Fourth, **Technological (The Chip icon)**:
-**AI Vision is the game changer.** It allows robots to 'see' delicate fruit, solving our handling problem.
+Fourth, **Technological**:
+**AI Vision is the game changer.** It allows robots to 'see' delicate fruit, solving our handling problem. This technology finally exists today (e.g., Google's RT-2 model).
 
-Fifth, **Legal (The Scales icon)**:
-New employment laws mean we can no longer rely on cheap gig-economy labor. We must hire full employees, which drives up costs.
+Fifth, **Legal**:
+New employment laws (like the **Uber Ruling**) mean we can no longer rely on cheap 'gig-economy' drivers. We must hire full employees with pensions, which increases our labor cost by **20%**.
 
-Conclusion: The 'Giant Warehouse' is too expensive, legally risky, and too slow."
+Conclusion: The 'Giant Warehouse' model is being killed by Taxes, Interest Rates, and Labor Laws."
 
 **[CLICK TO NEXT SLIDE]**
 
