@@ -1,160 +1,157 @@
-# Final Board Presentation Script: Ocado 2035 Strategy
-**Time Limit:** 10 Minutes Strict
-**Speaker:** [Your Name], Chief Strategy Officer
-**Audience:** Board of Directors
+# Final Presentation Script: Ocado Strategy
+**Time Limit:** 10 Minutes
+**Tone:** Clear, Simple, Direct.
 
 ---
 
 ### **Slide 1: Title Slide**
-**(Duration: 0:00 - 0:45 | 45 Seconds)**
+"Good morning. I am **[Name]**, Chief Strategy Officer.
 
-"Good morning, members of the Board. My name is **[State Your Name]**, and I am the Chief Strategy Officer.
+**Simply put: We are the company that builds the robots that pack groceries.**
 
-**Simply put: We are the company that builds the robots that pack online groceries.**
+For ten years, we have been famous for the **Ocado Smart Platform**—those giant warehouses where robots swarm to pack food.
 
-For the last decade, our valuation has been driven by the **Ocado Smart Platform (OSP)**—those massive robotic hives that automate food fulfillment. We are the undisputed leaders in this centralized model.
-
-However, my analysis of the 2035 horizon suggests this model is becoming obsolete. Today, I will present a foresight strategy arguing for a radical pivot: we must move from 'Mega-Infrastructure' to 'Distributed Intelligence'."
+But today, I will show you why this 'Giant Warehouse' model is becoming old-fashioned. I will present a new plan to move from 'Giant Buildings' to 'Local Networks'."
 
 **[CLICK TO NEXT SLIDE]**
 
 ---
 
 ### **Slide 2: Introduction**
-**(Duration: 0:45 - 1:30 | 45 Seconds)**
+"Let's look at **Slide 2**.
 
-"Let's ground this in our current reality. **What is Ocado today?**
+Ocado is at a turning point.
+Right now, we build **Centralized Networks**. We build massive hives 50 miles away from the city.
 
-We operate a **Centralized Network**. We build massive automated hives where robots swarm on a grid to pick groceries, which we then truck 50 miles to the customer.
+Look at the **'Tech Check'** on the screen.
+Our main tool is the robotic arm (Figure 1). It works great for boxes.
+But it has a **'Dexterity Problem'**. It is too clumsy. It crushes soft fruit.
+Because of this, we still have to pay humans to pack delicate items. This is expensive.
 
-As detailed in our **2023 Annual Report**, this 'Grid and Arm' architecture (Figure 1) creates incredibly high pick-rates for rigid packaging.
-
-But it has a fatal flaw: **Dexterity.** As noted by **Smith (2022) in the Journal of Robotics**, rigid manipulators cannot handle soft produce without bruising it. This leaves us reliant on expensive human labor for 20% of the basket.
-
-My presentation today covers three areas:
-1.  **Market Forces:** The external pressures killing this 'Big Box' model.
-2.  **Tech Audit:** The hidden fragility in our grid.
-3.  **The Pivot:** A roadmap to the 'Local Mesh'."
-
-**[CLICK TO NEXT SLIDE]**
-
----
-
-### **Slide 3: Market Forces (PESTEL)**
-**(Duration: 1:30 - 2:45 | 75 Seconds)**
-
-"Using the **PESTEL Framework**, we isolated the macro-drivers forcing this change.
-
-First, **Economic**: The era of cheap capital is dead. With base interest rates holding at 5%, the **Weighted Average Cost of Capital (WACC)** for building a £250m Customer Fulfillment Center has doubled since 2021. We simply cannot afford to build 'Mega-Sheds' anymore.
-
-Second, **Political**: The expansion of **ULEZ (Ultra Low Emission Zones)** in London and Paris places a £12.50 daily tax on every diesel van. For a centralized fleet of 2,000 vans, this is a multi-million pound operational penalty.
-
-Third, **Social**: The customer has shifted to **'Q-Commerce'**. As identified by **Deloitte (2024)**, 40% of urban consumers now expect delivery in under 60 minutes. A warehouse on the M25 motorway physically cannot service a customer in Chelsea that fast.
-
-We are being squeezed by **Cost, Compliance, and Convenience**."
+Today I will cover:
+1.  **Market:** Why the 'Giant Warehouse' is losing money.
+2.  **Tech Check:** Why our machines don't fit in cities.
+3.  **Strategy:** How we must change."
 
 **[CLICK TO NEXT SLIDE]**
 
 ---
 
-### **Slide 4: OSP Architecture**
-**(Duration: 2:45 - 3:30 | 45 Seconds)**
+### **Slide 3: Market Forces**
+"On **Slide 3**, we see the three forces squeezing our business.
 
-"To solve this, we must look at our architecture.
+First, **Political (The Gavel icon)**:
+Cities like London have introduced 'Green Zones' (ULEZ). They charge us £12.50 every day for every diesel van. This costs us millions in taxes.
 
-Currently, OSP is a linear system: Order → Brain → Hive → Van.
-The 'Hive' is a marvel of swarm robotics. But functionally, it is a **Monolith**.
-It requires a perfectly flat, custom-built floor. It cannot scale down. You cannot put a Hive in a basement. This architecture forces us into a 'Centralized' strategy, whether we like it or not."
+Second, **Economic (The Money icon)**:
+Interest rates are high (5%). Building a £250m warehouse is now too expensive. We cannot afford to borrow that much money anymore.
+
+Third, **Social (The People icon)**:
+Customers have changed. They want delivery in **one hour**, not next-day. A warehouse on the highway cannot reach a customer in Chelsea in 60 minutes.
+
+Conclusion: The 'Giant Warehouse' is too expensive and too slow."
+
+**[CLICK TO NEXT SLIDE]**
+
+---
+
+### **Slide 4: Architecture**
+"To solve this, look at our Architecture on **Slide 4**.
+
+Currently, our system is a straight line: Order → Brain → Hive → Van.
+The 'Hive' is a **Giant Block**.
+It needs a perfectly flat floor. You cannot make it smaller. You cannot put it in a basement.
+This forces us to build far away from the customer."
 
 **[CLICK TO NEXT SLIDE]**
 
 ---
 
 ### **Slide 5: Critical Limitations**
-**(Duration: 3:30 - 4:30 | 60 Seconds)**
+"This leads to the three problems you see on **Slide 5**.
 
-"This leads to **three** critical engineering bottlenecks shown in Figure 2.
+**Point 1: Too Heavy for City Shops.**
+Our grid weighs 2 tons per square meter. If we put this in a normal building, it would crash through the floor.
 
-First: **Infrastructure Rigidity.** The grid imposes a floor load of 2 tons per square meter. This rules out 95% of existing urban real estate.
+**Point 2: Clumsy Robots.**
+As I said, our robots crush strawberries. This means we still need human workers, which kills our profit.
 
-Second: **The Dexterity Gap.** As I touched on earlier, robots still crush soft fruit. This keeps expensive human labor in the loop, killing our unit economics.
+**Point 3: High Energy Cost.**
+A giant hive gets very hot. We spend millions cooling it down.
 
-Third: **Energy Intensity.** A standard Hive consumes megawatt-levels of power for cooling. In a volatile UK energy market, this high-consumption model is a significant financial risk.
-
-If the future is urban, our hardware physically cannot fit there."
-
-**[CLICK TO NEXT SLIDE]**
-
----
-
-### **Slide 6: Foresight Methodology (Tree)**
-**(Duration: 4:30 - 5:30 | 60 Seconds)**
-
-"To navigate this, we applied **Schwartz's Scenario Planning Methodology**. We mapped two critical uncertainties:
-1.  **AI Capability:** Will computer vision solve the dexterity gap?
-2.  **Network Topology:** Will logistics stay centralized or go distributed?
-
-This creates the Decision Tree you see here.
-We are currently at 'Status Quo'.
-If we ignore the market and stay **Centralized**, we drift into **Scenario 1: The Mega-Hive**.
-If we leverage AI to go **Decentralized**, we unlock **Scenario 2: The Local Mesh**."
+**The result:** Our machines are too big, too heavy, and too clumsy for the future city."
 
 **[CLICK TO NEXT SLIDE]**
 
 ---
 
-### **Slide 7: Scenario 1 - The "Monolith" Trap**
-**(Duration: 5:30 - 6:45 | 75 Seconds)**
+### **Slide 6: Future Planning**
+"So, we have a choice. Look at **Slide 6**.
 
-"Let's critically critique Scenario 1. This is 'business as usual'. We build fewer, larger automated warehouses.
+We used 'Scenario Planning' to see two different futures.
+1.  **Path 1 (Top):** We keep building Giant Warehouses.
+2.  **Path 2 (Bottom):** We use AI to go Local.
 
-While efficient on paper, this creates a **'Stranded Asset' risk**.
-We are pouring concrete for a 50-year asset lifespan. But the retail market cycles every 5-7 years. If consumer demand shifts entirely to 'instant' delivery, these massive sheds on the M25 become useless monuments.
-
-Furthermore, it creates a **Single Point of Failure**. As seen in the Andover fire, losing one node paralyzes an entire region. This is a fragile strategy."
+If we stay on Path 1, we fall into a Trap.
+If we choose Path 2, we build a 'Local Mesh'."
 
 **[CLICK TO NEXT SLIDE]**
 
 ---
 
-### **Slide 8: Scenario 2 - The "Local Mesh"**
-**(Duration: 6:45 - 8:00 | 75 Seconds)**
+### **Slide 7: Scenario 1 - The Trap**
+"Let's look at **Slide 7: The 'Giant Warehouse' Trap**.
 
-"Contrast this with Scenario 2: **The Local Mesh**. This is our recommended future.
+This is what happens if we don't change.
+We build a massive building that lasts 50 years.
+But shopping habits change every 5 years.
+If everyone switches to 'Instant Delivery', our giant warehouse becomes a **'Useless Building'**. It is in the wrong place, and we can't move it.
 
-Instead of one giant hub, we utilize 'High Street Voids'.
-Data from the **British Retail Consortium** indicates a 14% vacancy rate on high streets. We can retrofit these empty units with modular, soft-robotics systems.
+Also, look at the **'Risk of Failure'**. If one giant warehouse has a fire, we lose food supply for the whole region. It is too risky."
 
-This enables **Green Delivery**. By being located *within* the community, we replace diesel vans with cargo bikes and walkers. This insulates us from carbon taxes and aligns with the **UK Government's Net Zero Strategy**."
+**[CLICK TO NEXT SLIDE]**
+
+---
+
+### **Slide 8: Scenario 2 - The Local Mesh**
+"Now, look at **Slide 8**. This is our recommended future: **The Local Mesh**.
+
+Instead of one giant hub, we look at **'High Street Voids'** (Empty Shops).
+**14% of shops are empty.**
+We can put small, smart robots inside these empty shops.
+
+This allows **Green Delivery**.
+Because we are close to the customer, we can deliver by bike or on foot.
+No more vans. No more traffic taxes."
 
 **[CLICK TO NEXT SLIDE]**
 
 ---
 
 ### **Slide 9: Recommendations**
-**(Duration: 8:00 - 9:15 | 75 Seconds)**
+"To make this happen, I have a 3-step plan on **Slide 9**.
 
-"To execute this, I propose a three-phase Strategic Roadmap.
+**1. Immediate Action (The Blue Layer):**
+**Stop Building Giant Hubs.** We must stop spending money on new giant warehouses today.
 
-**Phase 1 (2025): Stop.** We must halt CapEx on new Mega-CFCs immediately.
+**2. New Research Goal (The Green Layer):**
+Focus on **'Soft Robotics'**. We need to invent robots that are gentle with fruit and can work in old, messy buildings.
 
-**Phase 2 (2026): Retrofit.** We divert R&D spend into **'Soft Robotics'**—machines that can operate in irregular, brownfield sites—and launch pilots in vacant retail units.
-
-**Phase 3 (2030): Unbundle.** This is the key strategic pivot. Currently, we sell 'The Shed' (Hardware). We must transition to selling 'The Brain' (Software). We should license our logistics AI to retailers to run *their own* local meshes, transforming Ocado into a high-margin SaaS platform rather than a construction company."
+**3. New Business Plan (The Orange Layer):**
+We stop being a construction company.
+Instead, we sell **'The Brain'** (our Software). We license our technology to supermarkets so they can run their own local networks."
 
 **[CLICK TO NEXT SLIDE]**
 
 ---
 
-### **Slide 10: Executive Summary**
-**(Duration: 9:15 - 10:00 | 45 Seconds)**
+### **Slide 10: Summary**
+"To summarize on **Slide 10**:
 
-"In conclusion:
+1.  **Market:** Taxes and Costs are killing the Big Warehouse model.
+2.  **Tech:** We need flexible robots that fit in cities.
+3.  **Vision:** We must become a 'Smart Logistics' company, not a 'Warehouse Builder'.
 
-1.  **Market:** The economic drivers (Interest Rates, Green Taxes) are making the Mega-Warehouse model unviable.
-2.  **Technology:** We must pivot from 'Rigid Grids' to 'Flexible Mesh' robotics.
-3.  **Vision:** By 2035, Ocado should not be defined by the warehouses we build, but by the intelligence that connects them.
-
-Thank you. I will now take questions on the financials of the retrofit strategy."
+Thank you. I am happy to take questions."
 
 **[END PRESENTATION]**
