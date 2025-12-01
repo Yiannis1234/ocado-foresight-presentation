@@ -67,8 +67,15 @@ Conclusion: The 'Giant Warehouse' model is being killed by Taxes, Interest Rates
 ### **Slide 4: Architecture**
 "To understand the problem, look at our Architecture on **Slide 4**.
 
-Currently, our system is a straight line: Order → Brain → Hive → Van.
-The 'Hive' is a **Giant Block**.
+This is the **'Hive' Grid System**.
+It is a dense 3D grid where robots swarm on top to dig for bins.
+The process is a rigid straight line (as shown in the diagram):
+1.  **Customer Order** comes in.
+2.  **The Brain** (AI) plans the route.
+3.  **The Hive** robots pick the food.
+4.  **Delivery** vans drive 50 miles to the home.
+
+The problem? The 'Hive' is a **Giant Block**.
 It needs a perfectly flat floor. You cannot make it smaller. You cannot put it in a basement.
 This forces us to build far away from the customer."
 
