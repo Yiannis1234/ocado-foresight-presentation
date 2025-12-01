@@ -107,7 +107,7 @@ This creates our 2x2 Matrix (shown as a tree here).
 2.  **Path 2 (Bottom):** We use AI to go Local.
 
 **How does AI help?**
-AI allows robots to work in messy environments. They don't need a perfect grid anymore. They can see and adapt.
+AI Vision allows robots to "see" in messy environments. They don't need a perfect grid anymore. They can adapt to old shops.
 This unlocks **Path 2: The Local Mesh**."
 
 **[CLICK TO NEXT SLIDE]**
