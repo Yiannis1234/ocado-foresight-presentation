@@ -87,13 +87,13 @@ This forces us to build far away from the customer."
 "This leads to the three problems you see on **Slide 5**.
 
 **Point 1: Too Heavy for City Shops.**
-Look at **Figure 2**. The massive 'Automated CFC' on the right is too heavy. It weighs 2 tons per square meter. It cannot fit in the small city shops shown on the left.
+Look at **Figure 2**. The massive 'Automated CFC' (Customer Fulfillment Center) on the right is our standard giant warehouse. It weighs 2 tons per square meter. It is simply too heavy to fit in the small city shops shown on the left.
 
 **Point 2: Clumsy Robots.**
 As I said, our robots crush strawberries. This means we still need human workers, which kills our profit.
 
 **Point 3: High Energy Cost.**
-A giant hive gets very hot. We spend millions cooling it down.
+A giant hive generates immense heat from thousands of motors. We spend millions on industrial cooling systems to keep it running.
 
 **The result:** Our machines are too big, too heavy, and too clumsy for the future city."
 
