@@ -26,8 +26,9 @@ Ocado is at a turning point.
 Right now, we build **Centralized Networks**. We build massive hives 50 miles away from the city.
 
 Look at the **'Tech Check'** on the screen.
-Our main tool is the robotic arm (Figure 1). It works great for boxes.
-But it has a **'Handling Problem'**. It is too clumsy. It crushes soft fruit.
+Our main tool is the robotic arm (Figure 1). It uses a **suction cup** to grab items.
+It works great for rigid boxes.
+But it has a **'Handling Problem'**. The suction cup fails on soft, irregular shapes like a bag of oranges. It is too clumsy.
 Because of this, we still have to pay humans to pack delicate items. This is expensive.
 
 Today I will cover:
@@ -40,18 +41,24 @@ Today I will cover:
 ---
 
 ### **Slide 3: Market Forces**
-"On **Slide 3**, we see the three forces squeezing our business.
+"On **Slide 3**, we see the five forces squeezing our business (PESTEL Analysis).
 
 First, **Political (The Gavel icon)**:
-Cities like London have introduced 'Green Zones' (ULEZ). They charge us £12.50 every day for every diesel van. This costs us millions in taxes.
+Cities like London have introduced 'Green Zones' (ULEZ). They charge us £12.50 every day for every diesel van.
 
 Second, **Economic (The Money icon)**:
-Interest rates are high (5%). Building a £250m warehouse is now too expensive. We cannot afford to borrow that much money anymore.
+Interest rates are high (5%). Building a £250m warehouse is now too expensive.
 
-Third, **Technological (The Chip icon)**:
-**AI Vision is the game changer.** New AI can now let robots 'see' the difference between a hard apple and a soft strawberry. This means robots can finally handle messy food without crushing it.
+Third, **Social (The People icon)**:
+Customers want delivery in **one hour**, not next-day. A distant warehouse cannot reach them fast enough.
 
-Conclusion: The 'Giant Warehouse' is too expensive, but AI gives us a new way out."
+Fourth, **Technological (The Chip icon)**:
+**AI Vision is the game changer.** It allows robots to 'see' delicate fruit, solving our handling problem.
+
+Fifth, **Legal (The Scales icon)**:
+New employment laws mean we can no longer rely on cheap gig-economy labor. We must hire full employees, which drives up costs.
+
+Conclusion: The 'Giant Warehouse' is too expensive, legally risky, and too slow."
 
 **[CLICK TO NEXT SLIDE]**
 
