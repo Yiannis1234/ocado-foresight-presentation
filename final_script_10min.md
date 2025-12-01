@@ -50,7 +50,7 @@ Second, **Economic**:
 Interest rates are high (5%). Building a £250m warehouse is now too expensive. We cannot afford to borrow money when debt is this expensive.
 
 Third, **Social**:
-Customers have changed. They want delivery in **one hour**, not next-day. A warehouse on the M25 highway simply cannot physically reach a customer in Chelsea in 60 minutes. We are too far away.
+Customers have changed. They want delivery in **one hour**, not next-day. A warehouse on the M25 motorway simply cannot physically reach a customer in Chelsea in 60 minutes. We are too far away.
 
 Fourth, **Technological**:
 **AI Vision is the game changer.** It allows robots to 'see' delicate fruit, solving our handling problem. This technology finally exists today (e.g., Google's RT-2 model).
