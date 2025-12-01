@@ -1,6 +1,6 @@
-# Final Presentation Script: Ocado Strategy
+# Final Presentation Script: Ocado Strategy (Simple English)
 **Time Limit:** 10 Minutes
-**Tone:** Clear, Simple, Direct.
+**Tone:** Simple, Clear, Direct.
 
 ---
 
@@ -25,7 +25,7 @@ Right now, we build **Centralized Networks**. We build massive hives 50 miles aw
 
 Look at the **'Tech Check'** on the screen.
 Our main tool is the robotic arm (Figure 1). It works great for boxes.
-But it has a **'Dexterity Problem'**. It is too clumsy. It crushes soft fruit.
+But it has a **'Handling Problem'**. It is too clumsy. It crushes soft fruit.
 Because of this, we still have to pay humans to pack delicate items. This is expensive.
 
 Today I will cover:
@@ -139,7 +139,7 @@ Focus on **'Soft Robotics'**. We need to invent robots that are gentle with frui
 
 **3. New Business Plan (The Orange Layer):**
 We stop being a construction company.
-Instead, we sell **'The Brain'** (our Software). We license our technology to supermarkets so they can run their own local networks."
+Instead, we sell **'The Brain'** (our Software). We license our technology to supermarkets so they can upgrade *their* stores, rather than building our own."
 
 **[CLICK TO NEXT SLIDE]**
 
