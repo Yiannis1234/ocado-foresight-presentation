@@ -97,7 +97,12 @@ A giant hive gets very hot. We spend millions cooling it down.
 ### **Slide 6: Future Planning**
 "So, we have a choice. Look at **Slide 6**.
 
-We used 'Scenario Planning' to see two different futures.
+To map this out scientifically, we used **Peter Schwartz's Scenario Planning Methodology**.
+We identified two 'Critical Uncertainties':
+1.  **AI Capability:** Will robots get smart enough to handle chaos?
+2.  **Network Topology:** Will the future be Centralized or Decentralized?
+
+This creates our 2x2 Matrix (shown as a tree here).
 1.  **Path 1 (Top):** We keep building Giant Warehouses.
 2.  **Path 2 (Bottom):** We use AI to go Local.
 
