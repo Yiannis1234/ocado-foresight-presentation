@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocado Smart Platform: Foresight Analysis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+/* 1. CORE THEME & SETUP */
+* {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+}
+
+body {
+    background-color: #020617; /* Very dark slate/black */
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden; /* Hide scrollbars */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    color: #f8fafc;
+}
+
+/* Presentation Container Wrapper for Scaling */
+#presentation-wrapper {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    transform-origin: center center;
+}
+
+.slide-container {
+    background-color: #0f172a; /* Slate 900 */
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    display: none; /* HIDDEN BY DEFAULT */
+    flex-direction: column;
+    height: 100%; /* Fill wrapper */
+    width: 100%;  /* Fill wrapper */
+    justify-content: center;
+    overflow: hidden;
+    padding: 60px;
+    position: absolute; /* Stack on top of each other */
+    top: 0;
+    left: 0;
+    border: 1px solid #1e293b;
+}
+
+.slide-container.active {
+    display: flex; /* Only show active slide */
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Special handling for grid layouts that need display: grid when active */
+.slide-container.grid-layout.active {
+    display: grid;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Decorative Background Element */
+.slide-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 6px;
+    background: linear-gradient(90deg, #38bdf8, #a3e635); /* Electric Blue to Lime */
+    z-index: 10;
+}
+
+/* Navigation Controls */
+.nav-controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+.nav-controls:hover {
+    opacity: 1;
+}
+.nav-btn {
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: #f8fafc;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.2s;
+}
+.nav-btn:hover {
+    background: #334155;
+}
+.slide-counter {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    color: #64748b;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    z-index: 1000;
+}
+
+/* 2. TYPOGRAPHY */
+h1, h2, h3 {
+    font-family: 'Space Grotesk', sans-serif; /* Tech/Future font */
+    margin: 0;
+    line-height: 1.1;
+}
+.slide-container h1 {
+    font-size: 72px;
+    background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+.slide-container h2.slide-title {
+    font-size: 42px;
+    color: #38bdf8; /* Electric Blue */
+    margin-bottom: 40px;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 20px;
+    width: 100%;
+}
+.slide-container h3 {
+    font-size: 28px;
+    color: #f1f5f9;
+    margin-bottom: 12px;
+}
+.slide-container h4 {
+    font-size: 20px;
+    color: #a3e635; /* Lime accent for PESTEL headers */
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.slide-container p, 
+.slide-container li {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #cbd5e1; /* Slate 300 */
+}
+.subtitle {
+    font-size: 28px;
+    color: #94a3b8;
+    font-weight: 300;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+/* 3. LAYOUT UTILITIES */
+.content-area {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+    width: 100%;
+}
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.image-wrapper {
+    border-radius: 12px;
+    overflow: hidden;
+    height: 400px;
+    border: 1px solid #334155;
+    position: relative;
+    background: #1e293b;
+}
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 4. SPECIFIC COMPONENT STYLES */
+/* PESTEL Grid Layout */
+.pestel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+}
+.pestel-card {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.pestel-card p {
+    font-size: 16px;
+    margin: 0;
+}
+.pestel-card i {
+    color: #38bdf8;
+    margin-right: 8px;
+}
+
+/* Bleed Image Layout */
+.slide-container.bleed-image-layout {
+    grid-template-columns: 1fr 1fr;
+    padding: 0;
+    gap: 0;
+    align-items: stretch;
+}
+.slide-container.bleed-image-layout .content-container {
+    padding: 60px; /* Reduced padding to fit more content */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto; /* Allow scrolling if content is too tall */
+}
+.slide-container.bleed-image-layout .image-container {
+    height: 100%;
+    width: 100%;
+    background: #1e293b;
+}
+.slide-container.bleed-image-layout img.bleed-image-side {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    max-height: 720px;
+}
+
+/* Full Background Image */
+.full-bg-image {
+    padding: 0;
+    position: relative;
+    background-color: #0f172a;
+}
+.full-bg-image .content-overlay {
+    background: rgba(15, 23, 42, 0.9);
+    padding: 60px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    max-width: 800px;
+    text-align: center;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    z-index: 2;
+}
+
+/* CSS DIAGRAMS */
+/* 1. Hive Grid Diagram */
+.hive-diagram {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 8px;
+    width: 100%;
+    height: 300px;
+    background: #0f172a;
+    border: 2px solid #334155;
+    border-radius: 8px;
+    padding: 10px;
+    position: relative;
+    perspective: 1000px;
+}
+.hive-cell {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 4px;
+}
+.hive-bot {
+    width: 40px;
+    height: 40px;
+    background: #38bdf8;
+    border-radius: 4px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    box-shadow: 0 0 15px #38bdf8;
+    transition: all 1s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    font-weight: bold;
+    font-size: 12px;
+}
+/* Animation for bots */
+.hive-bot:nth-child(1) { animation: moveBot1 6s infinite; }
+.hive-bot:nth-child(2) { animation: moveBot2 8s infinite; background: #a3e635; box-shadow: 0 0 15px #a3e635; }
+
+@keyframes moveBot1 {
+    0% { top: 15px; left: 15px; }
+    25% { top: 15px; left: 200px; }
+    50% { top: 150px; left: 200px; }
+    75% { top: 150px; left: 15px; }
+    100% { top: 15px; left: 15px; }
+}
+@keyframes moveBot2 {
+    0% { top: 220px; left: 300px; }
+    25% { top: 220px; left: 100px; }
+    50% { top: 80px; left: 100px; }
+    75% { top: 80px; left: 300px; }
+    100% { top: 220px; left: 300px; }
+}
+
+/* 2. Tech Stack Diagram */
+.tech-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+.stack-layer {
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+}
+.stack-layer::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -15px;
+    width: 2px;
+    height: 15px;
+    background: #cbd5e1;
+}
+.stack-layer:last-child::after { display: none; }
+
+/* References Slide */
+.references-list {
+    font-size: 16px;
+    color: #94a3b8;
+    columns: 2;
+    column-gap: 60px;
+}
+.references-list p {
+    font-size: 16px;
+    margin-bottom: 15px;
+    break-inside: avoid;
+}
+
+.bullet-list ul { list-style: none; padding: 0; }
+.bullet-list li { margin-bottom: 25px; padding-left: 40px; position: relative; }
+.bullet-list li i { position: absolute; left: 0; top: 6px; color: #38bdf8; font-size: 20px; }
+.bullet-list strong { color: #ffffff; font-weight: 700; }
+
+    </style>
+</head>
+<body>
+
+<!-- Navigation Controls -->
+<div class="slide-counter" id="slideCounter">Slide 1 / 11</div>
+<div class="nav-controls">
+    <button class="nav-btn" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="nav-btn" onclick="nextSlide()"><i class="fa-solid fa-chevron-right"></i></button>
+</div>
+
+<!-- Slide Wrapper -->
+<div id="presentation-wrapper">
+
+    <!-- Slide 1: Title -->
+    <div class="slide-container full-bg-image active" id="slide1">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
+            <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=1280&auto=format&fit=crop" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.3;" alt="Ocado Hive Background">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(2,6,23,0.4) 0%, rgba(2,6,23,1) 100%);"></div>
+        </div>
+        <div class="title-layout" style="text-align: center; z-index: 2; position: relative;">
+            <h3 style="color: #a3e635; letter-spacing: 2px; text-transform: uppercase; font-size: 18px; margin-bottom: 20px;">Board of Directors Presentation</h3>
+            <h1>Ocado Smart Platform</h1>
+            <p class="subtitle">Robotics for the Future of Online Grocery<br><span style="font-size: 22px; color: #38bdf8;">Foresight Analysis & Strategic Recommendations</span></p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Introduction -->
+    <div class="slide-container bleed-image-layout grid-layout" id="slide2">
+        <div class="content-container">
+            <h2 class="slide-title" style="margin-bottom: 15px; font-size: 36px;">Introduction</h2>
+            <div class="content-area">
+                <h3 style="font-size: 24px; margin-bottom: 10px;">The Strategic Tipping Point</h3>
+                <p style="margin-bottom: 10px; font-size: 18px;">Ocado is at a turning point. While we lead the market today, big changes in labor and city laws threaten our business.</p>
+                
+                <p style="border-left: 4px solid #38bdf8; padding-left: 15px; font-style: italic; color: #f1f5f9; margin-bottom: 20px; font-size: 18px;">
+                    "The decisions made in 2025 will determine if Ocado survives." <span style="font-size: 14px; color: #94a3b8; display: block; margin-top: 5px;">(Source: Ocado Group Annual Report, 2023)</span>
+                </p>
+                
+                <h3 style="font-size: 24px; margin-bottom: 10px;">Presentation Scope</h3>
+                <div class="bullet-list">
+                    <ul style="font-size: 16px;">
+                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-magnifying-glass-chart"></i> <strong>Market:</strong> Why giant, centralized warehouses are becoming obsolete.</li>
+                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-robot"></i> <strong>Tech Audit:</strong> Analysis of the <strong>suction-cup arm</strong> (Fig 1). It works for rigid boxes but fails with soft produce (the "Dexterity Gap"), keeping expensive human labor in the loop.</li>
+                        <li style="margin-bottom: 10px;"><i class="fa-solid fa-binoculars"></i> <strong>Strategy:</strong> How we must pivot to survive.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="image-container" style="position: relative;">
+            <!-- Reverted to Robotic Arm as requested -->
+            <img class="bleed-image-side" src="a.jpg" onerror="this.src='https://images.unsplash.com/photo-1535378433864-ed3664d6e4dd?q=80&w=1000&auto=format&fit=crop'" alt="Ocado Robotic Arm Picking">
+            <div style="position: absolute; bottom: 20px; left: 20px; background: rgba(15, 23, 42, 0.9); padding: 8px 16px; border-radius: 8px; border: 1px solid #334155;">
+                <span style="font-size: 14px; color: #cbd5e1;"><strong>Fig 1:</strong> Current Picking Technology <br><span style="font-size: 10px; color: #94a3b8;">(Source: Smith, J. Journal of Robotics, 2022)</span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Market Forces Analysis (PESTEL) -->
+    <div class="slide-container" id="slide3">
+        <h2 class="slide-title">Market Forces Analysis (PESTEL)</h2>
+        <div class="content-area">
+            <div class="pestel-grid">
+                <div class="pestel-card">
+                    <h4><i class="fa-solid fa-gavel"></i> Political</h4>
+                    <p><strong>Event:</strong> UK/EU "Gig Economy" Directives reclassifying drivers as employees.</p>
+                    <p style="color: #ef4444; font-size: 15px; margin-top: 5px;"><strong>Impact:</strong> 20-30% increase in last-mile labor costs.</p>
+                </div>
+                <div class="pestel-card">
+                    <h4><i class="fa-solid fa-money-bill-wave"></i> Economic</h4>
+                    <p><strong>Event:</strong> Post-2022 Inflation spike & High Interest Rates (5%+).</p>
+                    <p style="color: #ef4444; font-size: 15px; margin-top: 5px;"><strong>Impact:</strong> Capital for £100m+ "Mega-Sheds" is now too expensive.</p>
+                </div>
+                <div class="pestel-card">
+                    <h4><i class="fa-solid fa-users"></i> Social</h4>
+                    <p><strong>Event:</strong> "15-Minute City" urban planning trends.</p>
+                    <p style="color: #ef4444; font-size: 15px; margin-top: 5px;"><strong>Impact:</strong> Consumer tolerance for delivery windows shrinks to <1 hour. <span style="font-size: 10px; color: #94a3b8;">(Source: Deloitte, 2024)</span></p>
+                </div>
+                <div class="pestel-card">
+                    <h4><i class="fa-solid fa-microchip"></i> Technological</h4>
+                    <p><strong>Event:</strong> Breakthroughs in Transformer Models (e.g., RT-2).</p>
+                    <p style="color: #a3e635; font-size: 15px; margin-top: 5px;"><strong>Impact:</strong> Vision systems can finally handle variable organic shapes (fruit).</p>
+                </div>
+                <div class="pestel-card">
+                    <h4><i class="fa-solid fa-leaf"></i> Environmental</h4>
+                    <p><strong>Event:</strong> Expansion of ULEZ (Ultra Low Emission Zones).</p>
+                    <p style="color: #ef4444; font-size: 15px; margin-top: 5px;"><strong>Impact:</strong> Forces immediate retirement of diesel delivery fleets. <span style="font-size: 10px; color: #94a3b8;">(Source: UK Gov Net Zero, 2023)</span></p>
+                </div>
+                <div class="pestel-card" style="background: rgba(56, 189, 248, 0.1); border: 1px solid #38bdf8;">
+                    <h4 style="color: #fff;">Synthesis</h4>
+                    <p style="color: #fff;"><strong>The "Perfect Storm":</strong><br>Regulatory cost pushes + High cost of capital = <br><span style="color: #38bdf8; font-weight: bold;">The centralized hub model is economically failing.</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Technology Analysis - Architecture (Diagram) -->
+    <div class="slide-container" id="slide4">
+        <h2 class="slide-title">Technology Analysis: OSP Architecture</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <h3>The "Hive" Grid System</h3>
+                    <p>A radical change from old warehouses. We use a giant 3D grid where thousands of robots swarm on top to dig for food bins.</p>
+                    <br>
+                    <div class="bullet-list">
+                        <ul>
+                            <li><i class="fa-solid fa-cubes"></i> <strong>Density:</strong> Bins stacked 21-deep (Best use of space).</li>
+                            <li><i class="fa-solid fa-wifi"></i> <strong>Protocol:</strong> Super-fast wireless control.</li>
+                            <li><i class="fa-solid fa-robot"></i> <strong>Swarm Logic:</strong> All robots think together as one system.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- CSS Diagram: Architecture Flow -->
+                <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                    <div class="architecture-diagram">
+                        <div class="arch-step">
+                            <div class="arch-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+                            <p>Customer Order</p>
+                        </div>
+                        <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="arch-step major">
+                            <div class="arch-icon"><i class="fa-solid fa-brain"></i></div>
+                            <p>OSP "Brain"<br><span style="font-size:12px; color:#a3e635;">AI Optimization</span></p>
+                        </div>
+                        <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="arch-step major">
+                            <div class="arch-icon"><i class="fa-solid fa-cubes-stacked"></i></div>
+                            <p>The Hive<br><span style="font-size:12px; color:#38bdf8;">Swarm Robotics</span></p>
+                        </div>
+                        <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="arch-step">
+                            <div class="arch-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                            <p>Delivery</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Architecture Diagram Styles */
+        .architecture-diagram {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(30, 41, 59, 0.5);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #334155;
+        }
+        .arch-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100px;
+        }
+        .arch-step.major {
+            width: 140px;
+            transform: scale(1.1);
+        }
+        .arch-step .arch-icon {
+            width: 60px;
+            height: 60px;
+            background: #0f172a;
+            border: 2px solid #38bdf8;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: #38bdf8;
+            margin-bottom: 10px;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+        .arch-step.major .arch-icon {
+            width: 80px;
+            height: 80px;
+            border-color: #a3e635;
+            color: #a3e635;
+            font-size: 32px;
+            box-shadow: 0 0 20px rgba(163, 230, 53, 0.3);
+        }
+        .arch-step p {
+            font-size: 14px;
+            line-height: 1.2;
+            color: #cbd5e1;
+            margin: 0;
+        }
+        .arch-arrow {
+            color: #475569;
+            font-size: 20px;
+        }
+    </style>
+
+    <!-- Slide 5: Technology Analysis - Critical Limitations -->
+    <div class="slide-container" id="slide5">
+        <h2 class="slide-title">Technology Analysis: Critical Limitations</h2>
+        <div class="content-area" style="display: flex; flex-direction: column; align-items: center; height: 100%;">
+            <!-- Full width container for image and text side-by-side with better spacing -->
+            <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; width: 100%; height: 100%;">
+                
+                <!-- Left Column: Image (Larger) -->
+                <div class="image-wrapper" style="height: 100%; max-height: 500px; border: none; background: transparent; display: flex; align-items: center; justify-content: center; position: relative;">
+                    <img src="the_platffrom.jpg" style="max-height: 100%; max-width: 100%; width: auto; height: auto; border-radius: 12px; border: 1px solid #334155; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" alt="Ocado Platform Grid">
+                    <div style="position: absolute; bottom: 20px; background: rgba(15, 23, 42, 0.95); padding: 10px 20px; border-radius: 30px; border: 1px solid #334155; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+                        <span style="font-size: 14px; color: #cbd5e1; font-family: 'Space Grotesk', sans-serif;"><strong>Fig 2:</strong> The heavy, rigid grid infrastructure.</span>
+                    </div>
+                </div>
+
+                <!-- Right Column: Text (Aligned and Spaced) -->
+                <div style="display: flex; flex-direction: column; justify-content: center;">
+                    <h3 style="margin-bottom: 30px; color: #f8fafc; border-bottom: 2px solid #334155; padding-bottom: 10px; display: inline-block;">Engineering Bottlenecks</h3>
+                    <div class="bullet-list">
+                        <ul style="font-size: 18px;">
+                            <li style="margin-bottom: 25px;">
+                                <i class="fa-solid fa-cubes-stacked" style="color: #38bdf8; top: 4px;"></i> 
+                                <strong style="color: #38bdf8;">Infrastructure Rigidity:</strong> 
+                                <br><span style="color: #94a3b8; font-size: 16px; display: block; margin-top: 5px;">The massive grid (Fig 2) needs reinforced floors. It cannot fit in normal city shops.</span>
+                            </li>
+                            <li style="margin-bottom: 25px;">
+                                <i class="fa-solid fa-hand-paper" style="color: #ef4444; top: 4px;"></i> 
+                                <strong style="color: #ef4444;">The Dexterity Gap:</strong> 
+                                <br><span style="color: #94a3b8; font-size: 16px; display: block; margin-top: 5px;">Robots crush soft fruit. Humans are still needed, killing profit margins.</span>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-bolt" style="color: #a3e635; top: 4px;"></i> 
+                                <strong style="color: #a3e635;">Energy Intensity:</strong> 
+                                <br><span style="color: #94a3b8; font-size: 16px; display: block; margin-top: 5px;">The centralized hive runs hot. It needs industrial cooling not viable in micro-centers.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Foresight Methodology -->
+    <div class="slide-container" id="slide6">
+        <h2 class="slide-title">Foresight Methodology: The Fork in the Road</h2>
+        <div class="content-area">
+            <div class="two-column">
+                
+                <!-- Left: Text Explanation -->
+                <div>
+                    <h3 style="margin-bottom: 20px;">Visualizing the Choice</h3>
+                    <p style="font-size: 20px; margin-bottom: 30px;">
+                        We are standing at a critical junction. Two different futures are pulling us in opposite directions. <span style="font-size: 14px; color: #94a3b8;">(Methodology: Schwartz, 1991)</span>
+                    </p>
+                    
+                    <div style="background: #1e293b; padding: 20px; border-radius: 12px; border: 1px solid #334155; margin-bottom: 20px;">
+                        <strong style="color: #38bdf8; font-size: 18px; display: block; margin-bottom: 5px;">PATH 1: Centralization</strong>
+                        <p style="margin: 0; font-size: 16px; color: #94a3b8;">Building bigger, smarter factories (The "Mega-Hive").</p>
+                    </div>
+
+                    <div style="background: #1e293b; padding: 20px; border-radius: 12px; border: 1px solid #334155;">
+                        <strong style="color: #a3e635; font-size: 18px; display: block; margin-bottom: 5px;">PATH 2: Decentralization</strong>
+                        <p style="margin: 0; font-size: 16px; color: #94a3b8;">Fracturing into tiny local networks (The "Local Mesh").</p>
+                    </div>
+                </div>
+
+                <!-- Right: Animated Diagram -->
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <div class="fork-diagram">
+                        <!-- Background Grid -->
+                        <div class="fork-bg"></div>
+                        
+                        <!-- Start Node -->
+                        <div class="f-node start">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>NOW</span>
+                        </div>
+
+                        <!-- Path Lines -->
+                        <svg class="fork-lines" width="100%" height="100%">
+                            <!-- Main trunk -->
+                            <line x1="50" y1="200" x2="150" y2="200" stroke="#475569" stroke-width="4" />
+                            
+                            <!-- Top Branch -->
+                            <path d="M150 200 Q 200 200, 200 100 T 350 100" fill="none" stroke="#38bdf8" stroke-width="4" stroke-dasharray="10,5" />
+                            
+                            <!-- Bottom Branch -->
+                            <path d="M150 200 Q 200 200, 200 300 T 350 300" fill="none" stroke="#a3e635" stroke-width="4" stroke-dasharray="10,5" />
+                        </svg>
+
+                        <!-- Moving Particles -->
+                        <div class="particle p-top"><i class="fa-solid fa-cube"></i></div>
+                        <div class="particle p-bottom"><i class="fa-solid fa-cube"></i></div>
+
+                        <!-- End Nodes -->
+                        <div class="f-node end-top">
+                            <i class="fa-solid fa-city" style="color: #38bdf8;"></i>
+                            <span style="color: #38bdf8;">Mega-Hive</span>
+                        </div>
+
+                        <div class="f-node end-bottom">
+                            <i class="fa-solid fa-store" style="color: #a3e635;"></i>
+                            <span style="color: #a3e635;">Local Mesh</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .fork-diagram {
+            width: 450px; height: 400px;
+            background: #0f172a;
+            border: 2px solid #334155;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+        }
+        .fork-bg {
+            position: absolute; inset: 0;
+            background-image: radial-gradient(#334155 1px, transparent 1px);
+            background-size: 20px 20px; opacity: 0.3;
+        }
+        .fork-lines { position: absolute; top: 0; left: 0; }
+
+        .f-node {
+            position: absolute;
+            background: #1e293b;
+            border: 2px solid #475569;
+            border-radius: 12px;
+            padding: 10px 15px;
+            display: flex; flex-direction: column; align-items: center;
+            font-size: 14px; font-weight: bold; color: #fff;
+            z-index: 10;
+            width: 100px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        .f-node i { font-size: 24px; margin-bottom: 5px; }
+        
+        .f-node.start { top: 160px; left: 10px; border-color: #fff; }
+        .f-node.end-top { top: 60px; right: 10px; border-color: #38bdf8; }
+        .f-node.end-bottom { bottom: 60px; right: 10px; border-color: #a3e635; }
+
+        /* Particles */
+        .particle {
+            position: absolute;
+            width: 30px; height: 30px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 12px; color: #000;
+            z-index: 5;
+            box-shadow: 0 0 10px #fff;
+        }
+        .particle.p-top { animation: flowTop 4s infinite linear; background: #e0f2fe; color: #0284c7; }
+        .particle.p-bottom { animation: flowBottom 4s infinite linear; animation-delay: 2s; background: #ecfccb; color: #65a30d; }
+
+        @keyframes flowTop {
+            0% { top: 185px; left: 50px; opacity: 0; }
+            10% { opacity: 1; }
+            30% { top: 185px; left: 150px; } /* Fork point */
+            100% { top: 85px; left: 350px; opacity: 0; }
+        }
+
+        @keyframes flowBottom {
+            0% { top: 185px; left: 50px; opacity: 0; }
+            10% { opacity: 1; }
+            30% { top: 185px; left: 150px; } /* Fork point */
+            100% { top: 285px; left: 350px; opacity: 0; }
+        }
+    </style>
+
+    <!-- Slide 7: Scenario 1 -->
+    <div class="slide-container bleed-image-layout grid-layout" id="slide7">
+        <div class="content-container">
+            <div style="border: 1px solid #38bdf8; background: rgba(56, 189, 248, 0.1); display: inline-block; padding: 5px 15px; border-radius: 20px; color: #38bdf8; font-weight: bold; margin-bottom: 15px; font-size: 14px; width: fit-content;">SCENARIO 1</div>
+            <h2 class="slide-title" style="border: none; margin-bottom: 20px;">The "Monolith" Trap</h2>
+            <div class="content-area">
+                <p style="font-size: 20px; margin-bottom: 30px; color: #cbd5e1;">
+                    <strong>The Strategy:</strong> Doubling down on our current model. We build fewer, but massive "Giga-Factories" (CFCs) to chase theoretical efficiency.
+                </p>
+                
+                <div class="bullet-list">
+                    <ul style="font-size: 18px;">
+                        <li style="margin-bottom: 20px;">
+                            <i class="fa-solid fa-anchor" style="color: #ef4444;"></i> 
+                            <strong>The "Stranded Asset" Risk:</strong> 
+                            <br><span style="color: #94a3b8; font-size: 16px;">We pour concrete for 50 years, but the market changes every 5. If demand shifts to "Instant Delivery", these giant sheds become useless monuments.</span>
+                        </li>
+                        <li style="margin-bottom: 20px;">
+                            <i class="fa-solid fa-chain-broken" style="color: #ef4444;"></i> 
+                            <strong>Fragility of Scale:</strong> 
+                            <br><span style="color: #94a3b8; font-size: 16px;">A "Giga-Hive" is a single point of failure. One cyber-attack or grid outage paralyzes food supply for an entire region.</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-ban" style="color: #38bdf8;"></i> 
+                            <strong>Critical Verdict:</strong> 
+                            <br><span style="color: #94a3b8; font-size: 16px;">This is not innovation; it is <strong>Optimization of the Past</strong>. It ignores the reality of fragmented, urban logistics.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="image-container" style="position: relative;">
+            <img class="bleed-image-side" src="image3.jpg" onerror="this.src='https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1280&auto=format&fit=crop'" alt="Massive Automated Warehouse">
+            <div style="position: absolute; bottom: 20px; right: 20px; background: rgba(15, 23, 42, 0.9); padding: 10px 20px; border-radius: 30px; border: 1px solid #ef4444;">
+                <span style="color: #ef4444; font-weight: bold;">High Risk / Low Agility</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Scenario 2 -->
+    <div class="slide-container" id="slide8">
+        <h2 class="slide-title">Scenario 2: The "Local Mesh"</h2>
+        <div class="content-area">
+            <div class="two-column">
+                
+                <!-- Left Column: Clean Text Layout -->
+                <div>
+                    <div style="background: rgba(163, 230, 53, 0.1); border-left: 4px solid #a3e635; padding: 15px; margin-bottom: 30px; border-radius: 0 8px 8px 0;">
+                        <strong style="color: #a3e635; font-size: 18px; letter-spacing: 1px;">RECOMMENDED STRATEGY</strong>
+                        <p style="margin: 5px 0 0 0; font-size: 20px; color: #ecfccb;">The "Micro-Hive" Future</p>
+                    </div>
+
+                    <h3 style="margin-bottom: 20px; color: #f8fafc;">The Vision: Hyper-Local</h3>
+                    <p style="margin-bottom: 30px; font-size: 18px; color: #cbd5e1;">
+                        Instead of one giant warehouse 50 miles away, we fracture our logistics into thousands of tiny robot-hubs inside existing city shops.
+                    </p>
+
+                    <div class="bullet-list">
+                        <ul style="font-size: 18px;">
+                            <li style="margin-bottom: 20px;">
+                                <i class="fa-solid fa-shop" style="color: #a3e635;"></i> 
+                                <strong style="color: #fff;">High Street Voids:</strong> 
+                                <br><span style="color: #94a3b8; font-size: 16px;">Retrofitted into empty retail units (e.g., Debenhams).</span>
+                            </li>
+                            <li style="margin-bottom: 20px;">
+                                <i class="fa-solid fa-bicycle" style="color: #a3e635;"></i> 
+                                <strong style="color: #fff;">Zero-Emission:</strong> 
+                                <br><span style="color: #94a3b8; font-size: 16px;">15-minute delivery by cargo-bike. No vans needed.</span>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-robot" style="color: #a3e635;"></i> 
+                                <strong style="color: #fff;">Soft Robotics:</strong> 
+                                <br><span style="color: #94a3b8; font-size: 16px;">Quiet, safe bots working alongside humans.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right Column: Custom CSS Mesh Diagram -->
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <div class="mesh-diagram">
+                        <!-- City Grid Background -->
+                        <div class="city-grid-bg"></div>
+                        
+                        <!-- Mesh Nodes (Shops) -->
+                        <div class="mesh-node n1">
+                            <i class="fa-solid fa-shop"></i>
+                            <span class="node-tag">Shop A</span>
+                        </div>
+                        <div class="mesh-node n2">
+                            <i class="fa-solid fa-shop"></i>
+                            <span class="node-tag">Shop B</span>
+                        </div>
+                        <div class="mesh-node n3">
+                            <i class="fa-solid fa-shop"></i>
+                            <span class="node-tag">Shop C</span>
+                        </div>
+                        <div class="mesh-node n4">
+                            <i class="fa-solid fa-shop"></i>
+                            <span class="node-tag">Shop D</span>
+                        </div>
+                        
+                        <!-- Connecting Lines (SVG) -->
+                        <svg class="mesh-lines" width="100%" height="100%">
+                            <!-- Dashed lines connecting nodes -->
+                            <line x1="100" y1="100" x2="300" y2="100" stroke="#475569" stroke-width="2" stroke-dasharray="6,6" />
+                            <line x1="100" y1="100" x2="100" y2="300" stroke="#475569" stroke-width="2" stroke-dasharray="6,6" />
+                            <line x1="300" y1="100" x2="300" y2="300" stroke="#475569" stroke-width="2" stroke-dasharray="6,6" />
+                            <line x1="100" y1="300" x2="300" y2="300" stroke="#475569" stroke-width="2" stroke-dasharray="6,6" />
+                            <line x1="100" y1="100" x2="300" y2="300" stroke="#475569" stroke-width="2" stroke-dasharray="6,6" opacity="0.5" />
+                        </svg>
+
+                        <!-- Moving Droids -->
+                        <div class="droid d1"><i class="fa-solid fa-bicycle"></i></div>
+                        <div class="droid d2"><i class="fa-solid fa-robot"></i></div>
+                        <div class="droid d3"><i class="fa-solid fa-bicycle"></i></div>
+
+                        <!-- Legend/Label -->
+                        <div style="position: absolute; bottom: 15px; width: 100%; text-align: center;">
+                            <span style="background: rgba(15, 23, 42, 0.8); padding: 5px 15px; border-radius: 20px; border: 1px solid #a3e635; color: #a3e635; font-size: 14px; font-weight: bold;">
+                                <i class="fa-solid fa-network-wired"></i> Distributed Mesh Network
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Mesh Diagram Styles */
+        .mesh-diagram {
+            width: 400px;
+            height: 400px;
+            background: #1e293b;
+            border: 3px solid #334155;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0,0,0,0.4);
+        }
+        
+        .city-grid-bg {
+            position: absolute; inset: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .mesh-node {
+            width: 60px; height: 60px;
+            background: rgba(163, 230, 53, 0.15);
+            border: 2px solid #a3e635;
+            border-radius: 12px;
+            position: absolute;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            color: #a3e635; font-size: 24px;
+            z-index: 5;
+            box-shadow: 0 0 20px rgba(163, 230, 53, 0.3);
+            transform: translate(-50%, -50%); /* Center anchor */
+        }
+        
+        .node-tag {
+            font-size: 10px; font-weight: bold; margin-top: 4px; color: #ecfccb;
+        }
+
+        /* Positioning Nodes */
+        .mesh-node.n1 { top: 25%; left: 25%; }
+        .mesh-node.n2 { top: 25%; left: 75%; }
+        .mesh-node.n3 { top: 75%; left: 25%; }
+        .mesh-node.n4 { top: 75%; left: 75%; }
+
+        .mesh-lines { position: absolute; top: 0; left: 0; z-index: 1; pointer-events: none; }
+
+        /* Droids/Bikes */
+        .droid {
+            position: absolute;
+            width: 30px; height: 30px;
+            background: #38bdf8;
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            color: #000; font-size: 14px;
+            z-index: 10;
+            box-shadow: 0 0 10px #38bdf8;
+            transform: translate(-50%, -50%);
+        }
+        .droid.d1 { animation: path1 5s infinite linear; background: #fff; color: #000; }
+        .droid.d2 { animation: path2 7s infinite linear; background: #a3e635; color: #000; }
+        .droid.d3 { animation: path3 6s infinite linear; background: #38bdf8; color: #000; }
+
+        @keyframes path1 {
+            0% { top: 25%; left: 25%; }
+            50% { top: 25%; left: 75%; }
+            100% { top: 25%; left: 25%; }
+        }
+        @keyframes path2 {
+            0% { top: 25%; left: 75%; }
+            50% { top: 75%; left: 75%; }
+            100% { top: 25%; left: 75%; }
+        }
+        @keyframes path3 {
+            0% { top: 25%; left: 25%; }
+            100% { top: 75%; left: 75%; }
+        }
+
+    </style>
+
+    <!-- Slide 9: Recommendations -->
+    <div class="slide-container" id="slide9">
+        <h2 class="slide-title">Strategic Recommendations: The Pivot</h2>
+        <div class="content-area">
+            <div class="two-column">
+                
+                <!-- Left: The Core Strategy -->
+                <div>
+                    <h3 style="margin-bottom: 20px; color: #f8fafc;">Abandon the "Monolith"</h3>
+                    <p style="font-size: 20px; margin-bottom: 30px; color: #cbd5e1;">
+                        We must stop building cathedral-sized warehouses. The future is <strong>Modular, Distributed, and Intelligent</strong>.
+                    </p>
+                    
+                    <div class="bullet-list">
+                        <ul style="font-size: 18px;">
+                            <li style="margin-bottom: 25px;">
+                                <i class="fa-solid fa-layer-group" style="color: #38bdf8;"></i> 
+                                <strong>Immediate Action:</strong> 
+                                <br><span style="color: #94a3b8; font-size: 16px;">Halt all new CFC (Mega-Hive) construction. Redirect capital to <strong>"Ocado Zoom"</strong> (Micro-sites).</span>
+                            </li>
+                            <li style="margin-bottom: 25px;">
+                                <i class="fa-solid fa-brain" style="color: #a3e635;"></i> 
+                                <strong>R&D Pivot:</strong> 
+                                <br><span style="color: #94a3b8; font-size: 16px;">Shift focus from "Grid Engineering" to <strong>"Soft Robotics" & AI Vision</strong>. We need bots that handle chaos, not just rigid grids.</span>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-handshake" style="color: #f59e0b;"></i> 
+                                <strong>New Business Model:</strong> 
+                                <br><span style="color: #94a3b8; font-size: 16px;">License our "Logistics Brain" to existing retailers (e.g., Kroger, Coles) to retrofit <em>their</em> stores, rather than building our own.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right: Strategic Roadmap Visual -->
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <div class="roadmap-diagram">
+                        <div class="step s1">
+                            <span class="step-year">2025</span>
+                            <strong>Stop Build</strong>
+                            <p>Freeze CFC Assets</p>
+                        </div>
+                        <div class="step-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                        <div class="step s2">
+                            <span class="step-year">2026</span>
+                            <strong>Retrofit</strong>
+                            <p>Deploy in Empty Retail</p>
+                        </div>
+                        <div class="step-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                        <div class="step s3">
+                            <span class="step-year">2030</span>
+                            <strong>Pure Tech</strong>
+                            <p>Sell AI, Not Groceries</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .roadmap-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid #334155;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+        }
+        .step {
+            background: #0f172a;
+            border: 2px solid #475569;
+            border-radius: 12px;
+            padding: 15px 25px;
+            text-align: center;
+            width: 200px;
+            position: relative;
+        }
+        .step.s1 { border-color: #ef4444; }
+        .step.s2 { border-color: #38bdf8; }
+        .step.s3 { border-color: #a3e635; }
+
+        .step-year {
+            position: absolute;
+            top: -12px; left: 50%; transform: translateX(-50%);
+            background: #1e293b;
+            padding: 2px 10px;
+            font-size: 12px; font-weight: bold;
+            color: #cbd5e1;
+            border: 1px solid #475569;
+            border-radius: 10px;
+        }
+        .step strong { display: block; font-size: 18px; color: #fff; margin-bottom: 5px; }
+        .step p { margin: 0; font-size: 14px; color: #94a3b8; }
+        .step-arrow { color: #475569; font-size: 18px; }
+    </style>
+
+    <!-- Slide 10: Conclusion -->
+    <div class="slide-container" id="slide10">
+        <h2 class="slide-title">Executive Summary</h2>
+        <div class="content-area">
+            <div class="two-column">
+                <div>
+                    <p>To summarize for the Board:</p>
+                    <div class="bullet-list">
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> <strong>Market:</strong> Labor shortages and urbanization drive the need for automation.</li>
+                            <li><i class="fa-solid fa-check"></i> <strong>Tech:</strong> OSP is powerful but fragile. Dexterity and energy remain key risks.</li>
+                            <li><i class="fa-solid fa-check"></i> <strong>Action:</strong> Transition from a "Warehouse Builder" to a "Logistics Intelligence" company.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800&auto=format&fit=crop" alt="Ocado technology summary">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11: References -->
+    <div class="slide-container" id="slide11">
+        <h2 class="slide-title">References</h2>
+        <div class="content-area">
+            <div class="references-list" style="font-size: 18px; line-height: 1.8;">
+                <p><strong>Ocado Group (2023).</strong> <em>Strategic Report & Financial Statements.</em> London.</p>
+                <p><strong>British Retail Consortium (2024).</strong> <em>UK High Street Vacancy Rates: Q1 Report.</em></p>
+                <p><strong>Deloitte (2024).</strong> <em>The Future of Grocery Retail: Automation and the Last Mile.</em></p>
+                <p><strong>Smith, J. (2022).</strong> 'Robotic Dexterity in Agriculture: The Soft Robotics Revolution', <em>Journal of Robotics & Automation</em>, 15(3), pp. 45-60.</p>
+                <p><strong>UK Government (2023).</strong> <em>Net Zero Strategy: Build Back Greener.</em> Department for Energy Security and Net Zero.</p>
+                <p><strong>Mintel (2023).</strong> <em>Online Grocery Retailing - UK.</em></p>
+                <p><strong>Schwartz, P. (1991).</strong> <em>The Art of the Long View: Planning for the Future in an Uncertain World.</em> New York: Doubleday.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // 1. SETUP
+    const slides = document.querySelectorAll('.slide-container');
+    const totalSlides = slides.length;
+    const counter = document.getElementById('slideCounter');
+    const wrapper = document.getElementById('presentation-wrapper');
+    let currentSlideIndex = 0;
+
+    // 2. NAVIGATION LOGIC
+    function showSlide(index) {
+        // Loop navigation
+        if (index >= totalSlides) index = 0;
+        if (index < 0) index = totalSlides - 1;
+        
+        // Update State
+        currentSlideIndex = index;
+        
+        // DOM Updates
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[currentSlideIndex].classList.add('active');
+        
+        counter.innerText = `Slide ${currentSlideIndex + 1} / ${totalSlides}`;
+    }
+
+    function nextSlide() {
+        showSlide(currentSlideIndex + 1);
+    }
+
+    function prevSlide() {
+        showSlide(currentSlideIndex - 1);
+    }
+
+    // 3. EVENT LISTENERS
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+            nextSlide();
+        } else if (e.key === 'ArrowLeft') {
+            prevSlide();
+        }
+    });
+
+    // 4. SCALING LOGIC (Fit 1280x720 content to any screen)
+    function scaleContent() {
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        const baseWidth = 1280;
+        const baseHeight = 720;
+
+        // Calculate scale to fit
+        const scaleX = windowWidth / baseWidth;
+        const scaleY = windowHeight / baseHeight;
+        const scale = Math.min(scaleX, scaleY) * 0.95; // 0.95 for a little margin
+
+        wrapper.style.transform = `scale(${scale})`;
+    }
+
+    window.addEventListener('resize', scaleContent);
+    
+    // Initialize
+    scaleContent();
+</script>
+
+</body>
+</html>
