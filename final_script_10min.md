@@ -7,9 +7,11 @@
 ### **Slide 1: Title Slide**
 "Good morning. I am **[Name]**, Chief Strategy Officer.
 
-**Simply put: We are the company that builds the robots that pack groceries.**
+**Simply put: We are a technology company. We sell the Ocado Smart Platform (OSP).**
 
-For ten years, we have been famous for the **Ocado Smart Platform**—those giant warehouses where robots swarm to pack food.
+**This is not just robots. It is an end-to-end system: The website, the AI routing, and the automated warehouses.**
+
+For ten years, our value has come from these 'Giant Hives'—centralized warehouses where robots swarm to pack food.
 
 But today, I will show you why this 'Giant Warehouse' model is becoming old-fashioned. I will present a new plan to move from 'Giant Buildings' to 'Local Networks'."
 
