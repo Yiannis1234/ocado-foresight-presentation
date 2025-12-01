@@ -80,7 +80,7 @@ This forces us to build far away from the customer."
 "This leads to the three problems you see on **Slide 5**.
 
 **Point 1: Too Heavy for City Shops.**
-Our grid weighs 2 tons per square meter. If we put this in a normal building, it would crash through the floor.
+Look at **Figure 2**. The massive 'Automated CFC' on the right is too heavy. It weighs 2 tons per square meter. It cannot fit in the small city shops shown on the left.
 
 **Point 2: Clumsy Robots.**
 As I said, our robots crush strawberries. This means we still need human workers, which kills our profit.
