@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detailed Design Review & Engineering Verification</title>
+    <!-- MathJax for rendering equations -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #f4f6f8;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 10px;
+        }
+        h1 { 
+            text-align: center; 
+            border: none; 
+            margin-bottom: 40px;
+            font-size: 2.5em;
+        }
+        .container {
+            background: white;
+            padding: 60px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .section-break {
+            margin-top: 60px;
+            margin-bottom: 40px;
+            border-top: 4px solid #3498db;
+        }
+        .feedback-item {
+            background-color: #fff;
+            border-left: 5px solid #e74c3c;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .feedback-item.resolved {
+            border-left-color: #27ae60;
+        }
+        .action-plan {
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: 4px;
+            border: 1px solid #e9ecef;
+        }
+        .analytical-deep-dive {
+            background-color: #e8f4f8;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-size: 0.95em;
+            border-left: 4px solid #3498db;
+        }
+        .warning-box {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+        .code-block {
+            background-color: #2d3436;
+            color: #dfe6e9;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+        .figure-container {
+            border: 1px solid #ddd;
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin: 30px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .figure-caption {
+            font-style: italic;
+            color: #666;
+            margin-top: 15px;
+            font-size: 0.95em;
+            text-align: left;
+            padding: 0 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th { background-color: #f2f2f2; }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+            color: white;
+        }
+        .tag-critical { background-color: #e74c3c; }
+        .tag-design { background-color: #3498db; }
+        .tag-doc { background-color: #f39c12; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Detailed Design Review & Engineering Verification</h1>
+    <p><strong>Project:</strong> Pipeline Inspection & Cleaning Device (PICD)<br>
+    <strong>Date:</strong> December 2025<br>
+    <strong>Status:</strong> Critical Design Review (CDR) - Analytical Rectification</p>
+    <p>This document provides the deep engineering analysis required to address the critical feedback points. It moves beyond generic solutions to physics-based justifications for the design pivots.</p>
+
+    <!-- SECTION 1: FEEDBACK ANALYSIS -->
+    <div class="section-break"></div>
+    <h2>Part 1: Analytical Feedback Resolution</h2>
+
+    <!-- Point 1 -->
+    <div class="feedback-item">
+        <h3>1. Torque Requirements & Motor Power <span class="tag tag-critical">CRITICAL</span></h3>
+        <div class="analytical-deep-dive">
+            <strong>Engineering Analysis:</strong>
+            The initial calculation (0.0147 Nm) failed because it assumed the robot moves in a vacuum. In reality, the 1m power tether acts as a <strong>slender cylinder in cross-flow</strong>. 
+            <br><br>
+            At \( v = 1.5 \text{ m/s} \), the Reynolds number (\( Re \)) for a 10mm cable is approx \( 1.5 \times 10^4 \), placing it in the regime where the Drag Coefficient (\( C_d \)) is stable around 1.2. 
+            <br>
+            The Drag Force is dominated by pressure drag (form drag) rather than skin friction. 
+            $$ F_D = \frac{1}{2} \rho v^2 C_d A = 0.5 \times 1000 \times 1.5^2 \times 1.2 \times (0.01 \times 1) \approx 13.5 \text{ N} $$
+            This 13.5N force creates a counter-torque at the wheel radius (\( r = 0.05 \text{ m} \)).
+        </div>
+        <div class="action-plan">
+            <strong>Solution Strategy:</strong>
+            <ul>
+                <li><strong>Quantified Requirement:</strong> \( T_{load} = 13.5 \text{ N} \times 0.05 \text{ m} = 0.675 \text{ Nm} \).</li>
+                <li><strong>Motor Selection Validation:</strong> The selected 2 Nm motors provide a Safety Factor of \( 2.0 / 0.675 = 2.96 \). This is an acceptable engineering margin (standard is 2.0 - 4.0 for dynamic loads), replacing the erroneous "SF > 130".</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Point 2 -->
+    <div class="feedback-item resolved">
+        <h3>2. Pivot to Dry Pipe Environment <span class="tag tag-design">SCOPE CHANGE</span></h3>
+        <div class="analytical-deep-dive">
+            <strong>Justification:</strong>
+            Engineering validation follows a hierarchy: 
+            1. <strong>Geometric</strong> (Does it fit?) &rarr; 
+            2. <strong>Kinematic</strong> (Does it move correctly?) &rarr; 
+            3. <strong>Dynamic</strong> (Can it handle forces?) &rarr; 
+            4. <strong>Environmental</strong> (Waterproofing/Thermal).
+            <br><br>
+            Attempting Level 4 (IP68 waterproofing) before validating Level 2 (Cornering Kinematics) creates a high risk of <strong>compounded failure modes</strong> (e.g., a leak causing an electrical short masks a mechanical jamming issue).
+        </div>
+        <div class="action-plan">
+            <strong>Solution Strategy:</strong>
+            <ul>
+                <li><strong>De-risk Prototype:</strong> Isolate the mechanical variables. By removing water, we eliminate buoyancy and hydrostatic pressure variables, allowing precise measurement of <strong>traction coefficients</strong> and <strong>cornering efficiency</strong>.</li>
+                <li><strong>Specification Update:</strong> Explicitly define the prototype phase as "Dry-Kinematic Validation".</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Point 3 -->
+    <div class="feedback-item resolved">
+        <h3>3. Off-the-Shelf Chassis (PVC) <span class="tag tag-design">MANUFACTURING</span></h3>
+        <div class="analytical-deep-dive">
+            <strong>Material Analysis:</strong>
+            3D printed PLA has a low Young's Modulus (~3.5 GPa) and is anisotropic (weak between layers). A large printed cylinder under torsional load (from the motors) is liable to <strong>delaminate</strong> or warp.
+            <br><br>
+            Extruded uPVC (Unplasticized Polyvinyl Chloride) is isotropic, has higher impact resistance, and precise tolerance (\( \pm 0.2 \text{ mm} \)) for concentricity, which is critical for maintaining the wheel-to-wall contact patch.
+        </div>
+        <div class="action-plan">
+            <strong>Solution Strategy:</strong>
+            <ul>
+                <li><strong>Hybrid Manufacturing:</strong> Use a standard 110mm OD PVC pipe as the structural "chassis backbone".</li>
+                <li><strong>Internal Sleds:</strong> Design 3D printed internal bulkheads that slide into the PVC. This decouples the <em>structural</em> load (taken by PVC) from the <em>component mounting</em> features (printed).</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Point 4 -->
+    <div class="feedback-item">
+        <h3>4. Wheel Contact Area & Alignment <span class="tag tag-design">MECHANICAL</span></h3>
+        <div class="analytical-deep-dive">
+            <strong>Contact Mechanics:</strong>
+            A flat wheel on a curved pipe wall creates a <strong>Point Contact</strong> (theoretically zero area). Under load, this creates massive Hertzian Contact Stress, deforming the rubber and causing rapid wear or unpredictable slip.
+            <br><br>
+            To maximize Traction Force (\( F_t = \mu N \)), we need to maximize the contact area to distribute the normal load and engage the rubber's shear properties.
+        </div>
+        <div class="action-plan">
+            <strong>Solution Strategy:</strong>
+            <ul>
+                <li><strong>Profiled Wheels:</strong> Machine or print wheels with a <strong>transverse radius</strong> matching the pipe curvature (R=100mm). This transforms the contact from a "Point" to a "Line" or "Patch", significantly increasing the friction coefficient reliability.</li>
+                <li><strong>Alignment Geometry:</strong> Ensure the pivot arms maintain the wheel axis <strong>perpendicular</strong> to the pipe radius vector at all extension lengths.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Point 5 -->
+    <div class="feedback-item resolved">
+        <h3>5. Two-Motor Configuration (Optimized) <span class="tag tag-design">STABILITY</span></h3>
+        <div class="analytical-deep-dive">
+            <strong>Stability Analysis (Why 2 Motors?):</strong>
+            Adding a 3rd motor increases weight, control complexity (requires 3-axis mixing), and power consumption.
+            <br><br>
+            For a pipe robot, <strong>Passive Stability</strong> is superior to Active Control. By placing two motors in a "V" or "Bicycle" configuration at the bottom of the pipe (4 o'clock and 8 o'clock positions), the <strong>Center of Mass (CoM)</strong> remains below the Center of Curvature. 
+            <br>
+            Gravity provides a restoring moment if the robot tilts. This "pendulum effect" makes a 3rd motor redundant for stabilization.
+        </div>
+        <div class="action-plan">
+            <strong>Solution Strategy:</strong>
+            <ul>
+                <li><strong>Retain 2 Motors:</strong> Do NOT upgrade to 3. Focus on lowering the CoM.</li>
+                <li><strong>Battery Placement:</strong> Mount the heavy batteries at the absolute lowest point of the chassis (inside the PVC belly) to maximize the "pendulum" stability margin.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Point 7 -->
+    <div class="feedback-item">
+        <h3>7. Maneuverability Spec <span class="tag tag-critical">CRITICAL</span></h3>
+        <div class="analytical-deep-dive">
+            <strong>Geometric Constraints:</strong>
+            The primary failure mode is not "Running out of Torque" but "Geometric Jamming". 
+            <br>
+            In a 90-degree bend, a long rigid body behaves like a chord in a circle. If the chord height (sagitta) exceeds the available clearance, the robot wedges against the inner and outer walls simultaneously. This is a binary failure state (Pass/Fail).
+        </div>
+        <div class="action-plan">
+            <strong>Solution Strategy:</strong>
+            <ul>
+                <li><strong>Mathematical Validation:</strong> Implement the inequality derived in Part 2.</li>
+                <li><strong>Design Limit:</strong> If \( L_{chassis} > 250 \text{ mm} \), the rigid body MUST be split into two articulated segments (front/rear) connected by a universal joint.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SECTION 2: ENGINEERING VERIFICATION -->
+    <div class="section-break"></div>
+    <h2>Part 2: Rigorous Engineering Models</h2>
+
+    <h3>1. Geometric Passability Analysis (Figure 1 Explanation)</h3>
+    <p>
+        The diagram below visualizes the "Three-Point Jamming" phenomenon, which is the governing constraint for the chassis length.
+    </p>
+    
+    <div class="figure-container">
+        <svg width="700" height="450" viewBox="0 0 700 450" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background Grid -->
+            <defs>
+                <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#eee" stroke-width="1"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+            
+            <!-- Pipe Geometry -->
+            <!-- Inner Wall (R_in) -->
+            <path d="M 100 400 A 150 150 0 0 1 250 250" fill="none" stroke="#2c3e50" stroke-width="4" />
+            <text x="120" y="380" fill="#2c3e50" font-size="12">Inner Wall (R_in)</text>
+            
+            <!-- Outer Wall (R_out) -->
+            <path d="M 100 400 A 350 350 0 0 1 450 50" fill="none" stroke="#2c3e50" stroke-width="4" />
+            <text x="350" y="80" fill="#2c3e50" font-size="12">Outer Wall (R_out)</text>
+            
+            <!-- The Robot (Jamming State) -->
+            <!-- Rectangle rotated to bridge the gap -->
+            <g transform="translate(240, 220) rotate(-45)">
+                <!-- Robot Body -->
+                <rect x="-120" y="-60" width="240" height="120" fill="rgba(231, 76, 60, 0.2)" stroke="#c0392b" stroke-width="3" stroke-dasharray="5,5"/>
+                
+                <!-- Contact Points -->
+                <!-- 1. Inner Midpoint Jam -->
+                <circle cx="0" cy="60" r="6" fill="#e74c3c" />
+                <text x="0" y="80" text-anchor="middle" font-weight="bold" fill="#c0392b">Point 1: Inner Jam</text>
+                
+                <!-- 2. Outer Corner Jam (Front) -->
+                <circle cx="120" cy="-60" r="6" fill="#e74c3c" />
+                <text x="130" y="-70" font-weight="bold" fill="#c0392b">Point 2: Outer Jam</text>
+                
+                <!-- 3. Outer Corner Jam (Rear) -->
+                <circle cx="-120" cy="-60" r="6" fill="#e74c3c" />
+            </g>
+            
+            <!-- Dimensions -->
+            <line x1="240" y1="220" x2="320" y2="140" stroke="#333" stroke-width="1" marker-end="url(#arrow)" />
+            <text x="330" y="160" font-size="12">Robot Length (L)</text>
+
+        </svg>
+        <div class="figure-caption">
+            <strong>Figure 1: Geometric Jamming Mechanism.</strong> 
+            <br>The critical failure mode occurs when the robot enters the bend. The rigid chassis forms a chord (straight line) across the arc. 
+            <br><strong>Failure Condition:</strong> If the "Sagitta" (distance from the chord to the inner wall arc) plus the robot width exceeds the pipe clearance, the robot becomes physically wedged.
+            <br>This is independent of motor power; infinite torque would only crush the robot, not advance it.
+        </div>
+    </div>
+
+    <h4>Analytical Derivation</h4>
+    <p>The passing condition requires that the robot's diagonal clearance radius does not exceed the available outer bend radius, while the inner body clears the inner wall. This simplifies to:</p>
+    
+    $$ \sqrt{ \left( \frac{L_{robot}}{2} \right)^2 + \left( R_{bend} + D_{pipe} - \frac{W_{robot}}{2} \right)^2 } \leq (R_{bend} + D_{pipe}) $$
+
+    <h3>2. Hydrodynamic Verification (Graph)</h3>
+    <p>
+        The analysis below confirms that at 1.5 m/s, drag forces (~13.5N) far exceed the friction limit of standard wheels (0.5N), necessitating the high-torque motor selection derived in Part 1.
+    </p>
+    
+    <div class="figure-container">
+        <img src="verification_graph.png" alt="Traction vs Drag Verification Graph" style="max-width: 100%; border: 1px solid #ddd;">
+        <div class="figure-caption">Figure 2: Analytical Output. The intersection point proves the system fails at low velocities without the proposed high-torque intervention.</div>
+    </div>
+</div>
+</body>
+</html>
